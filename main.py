@@ -1,4 +1,4 @@
-from game_manager import GameManager
+from test_manager import TestManager
 from app_ui import AppUI, show_result
 
 WORDS_FILE = "words.txt"
@@ -19,9 +19,9 @@ def stop_test() -> None:
     screen.stop_game()
     timer_test = None
 
-    game.check_words_against_wordlist(screen.get_typed_words())
-    show_result(game.words_per_min, game.chars_per_min)
-    show_result(wrong_words="\n".join(game.wrong_words))
+    test.check_words_against_wordlist(screen.get_typed_words())
+    show_result(test.words_per_min, test.chars_per_min)
+    show_result(wrong_words="\n".join(test.wrong_words))
 
 
 def start_test(count: int = None) -> None:
@@ -37,7 +37,7 @@ def start_test(count: int = None) -> None:
             screen.update_button_text(count - TEST_SECONDS)
         elif count and count == TEST_SECONDS:
             # If count it's equal to the test amount of seconds start the test
-            screen.start_game(game.retrieve_words_from_file(WORDS_FILE, NUM_WORDS_RETRIEVE))
+            screen.start_game(test.retrieve_words_from_file(WORDS_FILE, NUM_WORDS_RETRIEVE))
             screen.update_button_text(count - TEST_SECONDS)
 
         if count and count > 0:
@@ -57,5 +57,5 @@ def start_test(count: int = None) -> None:
 
 
 screen = AppUI(start_test)
-game = GameManager()
+test = TestManager()
 screen.mainloop()

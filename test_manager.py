@@ -1,7 +1,7 @@
 from random import choices
 
 
-class GameManager:
+class TestManager:
     def __init__(self):
         self.wordlist = []
         self.words_per_min = 0
